@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-100">
-    <header class="bg-blue-600 text-white p-4">
-      <h1 class="text-3xl font-bold">Shopping App</h1>
+    <header class="bg-blue-600 text-white p-4 shadow-lg">
+      <h1 class="text-3xl font-bold text-center">Shopping App</h1>
     </header>
     <main class="container mx-auto p-4">
       <ProductList :products="products" @add-to-cart="addToCart" />
@@ -56,6 +56,6 @@ onMounted(() => {
 
 <style scoped>
 .container {
-  max-width: 600px;
+  max-width: 800px; /* Wider container for better layout */
 }
 </style>

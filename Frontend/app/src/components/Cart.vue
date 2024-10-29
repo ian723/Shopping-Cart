@@ -1,25 +1,27 @@
 <template>
-  <div class="container mx-auto p-4">
+  <div class="mt-8 p-4 bg-white rounded-lg shadow-md">
     <h2 class="text-2xl font-bold mb-4">Shopping Cart</h2>
     <ul class="space-y-4">
       <li
         v-for="item in cart"
         :key="item.id"
-        class="flex items-center p-4 border rounded-lg shadow"
+        class="flex items-center p-4 border-b border-gray-200"
       >
         <img
           :src="item.image"
           alt="Product image"
-          class="h-16 w-16 mr-4 object-cover"
+          class="h-16 w-16 mr-4 object-cover rounded"
         />
         <div class="flex-grow">
           <h3 class="text-xl font-semibold">{{ item.name }}</h3>
           <p>Quantity: {{ item.quantity }}</p>
-          <p class="text-gray-500">${{ item.price.toFixed(2) }}</p>
+          <p class="text-gray-500">
+            Ksh{{ (item.price * item.quantity).toFixed(2) }}
+          </p>
         </div>
         <button
           @click="removeFromCart(item)"
-          class="bg-red-500 text-white px-2 py-1 rounded"
+          class="bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 transition-colors"
         >
           Remove
         </button>
@@ -42,7 +44,7 @@
     <button
       @click="checkout"
       :disabled="cart.length === 0 || isLoading"
-      class="bg-blue-500 text-white px-4 py-2 rounded"
+      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
     >
       {{ isLoading ? "Processing..." : "Checkout" }}
     </button>
@@ -82,7 +84,6 @@ const checkout = async () => {
   const paymentMethod = selectedPaymentMethod.value;
   if (paymentMethod === "cashless") {
     const phoneNumber = prompt("Please enter your phone number:");
-    // Add phone number validation here if needed
     if (!phoneNumber) {
       alert("Phone number is required for cashless payment.");
       return;
@@ -115,7 +116,5 @@ const checkout = async () => {
 </script>
 
 <style scoped>
-.container {
-  max-width: 600px;
-}
+/* Additional styles if needed */
 </style>
