@@ -107,7 +107,7 @@ const checkout = async () => {
       );
       console.error(error);
     } finally {
-      isLoading.value = false; // Reset loading state
+      isLoading.value = false; 
     }
   } else {
     alert(`Proceeding to checkout with cash payment...`);
@@ -115,6 +115,3 @@ const checkout = async () => {
 };
 </script>
 
-<style scoped>
-/* Additional styles if needed */
-</style>

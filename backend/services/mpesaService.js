@@ -1,13 +1,13 @@
 const axios = require("axios");
+require('dotenv').config();
 
 const baseUrl = "https://sandbox.safaricom.co.ke";
 const shortcode = "";
 const lipaNaMpesaOnline = `${baseUrl}/mpesa/stkpush/v1/processrequest`;
 const oauthUrl = `${baseUrl}/oauth/v1/generate?grant_type=client_credentials`;
 
-// Replace with your actual consumer key and secret
-const consumerKey = "ASR06QGXhcMlTek7drzNxfj6wuURDYGu8iOG88MY0pIeEKY5"; 
-const consumerSecret = "EEWHFtM12jcu7GH50oQ4Aj40fuJFOFLit5FuCF6aqMerisHPSAxDGvCH29tdzjoe";
+const consumerKey = process.env.CONSUMER_KEY;
+const consumerSecret = process.env.CONSUMER_SECRET;
 
 // Function to get the access token
 async function getAccessToken() {

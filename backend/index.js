@@ -1,10 +1,9 @@
-// backend/server.js
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const productRoutes = require('./routes/products');
 const paymentRoutes = require('./routes/payment');
-require('dotenv').config(); // Load environment variables
+require('dotenv').config(); 
 
 const app = express();
 
@@ -18,8 +17,8 @@ app.use('/api/payments', paymentRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
-  console.error(err.stack); // Log error stack trace for debugging
-  res.status(500).json({ error: 'Something went wrong!' }); // Send generic error response
+  console.error(err.stack);
+  res.status(500).json({ error: 'Something went wrong!' }); 
 });
 
 // Start server

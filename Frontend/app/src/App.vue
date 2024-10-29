@@ -56,6 +56,6 @@ onMounted(() => {
 
 <style scoped>
 .container {
-  max-width: 800px; /* Wider container for better layout */
+  max-width: 800px;
 }
 </style>

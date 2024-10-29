@@ -41,6 +41,3 @@ const addToCart = (product) => {
 };
 </script>
 
-<style scoped>
-/* Additional styles if needed */
-</style>
