@@ -1,11 +1,14 @@
 const axios = require("axios");
-require('dotenv').config();
+const dayjs = require("dayjs");
+require("dotenv").config();
 
 const baseUrl = "https://sandbox.safaricom.co.ke";
-const shortcode = "";
+const shortcode = process.env.SHORTCODE;
+const passkey = process.env.PASSKEY;
+const timestamp = dayjs().format("YYYYMMDDHHmmss");
 const lipaNaMpesaOnline = `${baseUrl}/mpesa/stkpush/v1/processrequest`;
 const oauthUrl = `${baseUrl}/oauth/v1/generate?grant_type=client_credentials`;
-
+const callbackurl = process.env.CALLBACK_URL;
 const consumerKey = process.env.CONSUMER_KEY;
 const consumerSecret = process.env.CONSUMER_SECRET;
 
@@ -20,7 +23,10 @@ async function getAccessToken() {
     });
     return response.data.access_token;
   } catch (error) {
-    console.error("Error getting access token:", error.response ? error.response.data : error.message);
+    console.error(
+      "Error getting access token:",
+      error.response ? error.response.data : error.message
+    );
     throw new Error("Could not retrieve access token.");
   }
 }
@@ -33,21 +39,21 @@ async function initiatePayment(phoneNumber, amount) {
     "Content-Type": "application/json",
   };
 
-  const password = Buffer.from(
-    `${shortcode}MY_LIPA_NA_MPESA_ONLINE_PASSWORD${new Date().toISOString().replace(/[-:]/g, "").slice(0, 14)}`
-  ).toString("base64");
+  const password = Buffer.from(shortcode + passkey + timestamp).toString(
+    "base64"
+  );
 
   const payload = {
     BusinessShortCode: shortcode,
     Password: password,
-    Timestamp: new Date().toISOString().replace(/[-:]/g, "").slice(0, 14),
+    Timestamp: timestamp,
     TransactionType: "CustomerPayBillOnline",
     Amount: amount,
     PartyA: phoneNumber,
     PartyB: shortcode,
     PhoneNumber: phoneNumber,
-    CallBackURL: "MY_CALLBACK_URL",
-    AccountReference: "Test123",
+    CallBackURL: `${callbackurl}/callback`,
+    AccountReference: "shopping-purchase",
     TransactionDesc: "Payment for testing",
   };
 
@@ -58,7 +64,10 @@ async function initiatePayment(phoneNumber, amount) {
     console.log("M-Pesa response:", response.data);
     return response.data;
   } catch (error) {
-    console.error("Error initiating payment:", error.response ? error.response.data : error.message);
+    console.error(
+      "Error initiating payment:",
+      error.response ? error.response.data : error.message
+    );
     throw new Error("Payment initiation failed.");
   }
 }
