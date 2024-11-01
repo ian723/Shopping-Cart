@@ -83,7 +83,9 @@ const removeFromCart = (item) => {
 const checkout = async () => {
   const paymentMethod = selectedPaymentMethod.value;
   if (paymentMethod === "cashless") {
-    const phoneNumber = prompt("Please enter your phone number:");
+    const phoneNumber = prompt(
+      "Please enter your phone number,start with 254..."
+    );
     if (!phoneNumber) {
       alert("Phone number is required for cashless payment.");
       return;
@@ -100,18 +102,19 @@ const checkout = async () => {
           amount,
         }
       );
-      alert(`Payment response: ${JSON.stringify(response.data)}`);
+      alert(
+        `Payment response: ${JSON.stringify(response.data.ResponseDescription)}`
+      );
     } catch (error) {
       alert(
         `Payment failed: ${error.response?.data?.message || "Unknown error"}`
       );
       console.error(error);
     } finally {
-      isLoading.value = false; 
+      isLoading.value = false;
     }
   } else {
     alert(`Proceeding to checkout with cash payment...`);
   }
 };
 </script>
-
