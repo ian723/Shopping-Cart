@@ -107,7 +107,7 @@ const checkout = async () => {
       );
     } catch (error) {
       alert(
-        `Payment failed: ${error.response?.data?.message || "Unknown error"}`
+        `Payment failed: ${error.response?.data?.error || "Unknown error"}`
       );
       console.error(error);
     } finally {
