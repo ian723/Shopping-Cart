@@ -13,8 +13,10 @@ router.post("/pay", async (req, res) => {
     );
     res.json(paymentResponse);
   } catch (error) {
-    console.error("Payment initiation error:", error.message);
-    res.status(500).json({ error: "Payment initiation failed" });
+    console.error("Payment initiation error:", error);
+    res
+      .status(500)
+      .json({ error: "Payment initiation failed", details: error.message });
   }
 });
 
