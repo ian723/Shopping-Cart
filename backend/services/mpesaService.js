@@ -21,6 +21,7 @@ async function getAccessToken() {
         password: consumerSecret,
       },
     });
+    console.log("Access Token Response:", response.data);
     return response.data.access_token;
   } catch (error) {
     console.error(
@@ -30,6 +31,7 @@ async function getAccessToken() {
     throw new Error("Could not retrieve access token.");
   }
 }
+
 
 // Function to initiate payment
 async function initiatePayment(phoneNumber, amount) {
