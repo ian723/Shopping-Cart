@@ -4,7 +4,7 @@
 
 `npm i`
 
-## How to run the mpesa api locally
+## How to run the server and mpesa api locally
 
 Create an account in Mpesa Daraja API website
 
@@ -24,19 +24,15 @@ through installing local tunneling apps e.g localtunnel, localhost.run, ngrok et
 
 Install localtunnel via `npm i -g localtunnel`
 
-## Run the Server
-
-To run the dev server do:
-
-`npm run dev`
-
 Run localtunnel in a new terminal via `lt --port 5000`
 
 It will display a url, copy the url to the `.env` file in the `CALLBACK_URL` value and leave it running
 
 You can leave the shortcode as it is for local testing.
 
-Restart the dev server by `CTRL + C` and then run `npm run dev` again
+To run the dev server do:
+
+`npm run dev`
 
 You can now test the payment by buying a product and checkout as cashless
 
